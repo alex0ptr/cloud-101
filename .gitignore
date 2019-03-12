@@ -1,0 +1,7 @@
+**.idea/
+**.mvn/
+dragonjokes/target/
+*.svg
+*.iml
+**.terraform/
+*.DS_Store

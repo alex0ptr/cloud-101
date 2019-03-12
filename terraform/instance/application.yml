@@ -1,0 +1,13 @@
+config:
+  tableName: ${tableName}
+  jokes: 
+    - A dragon sees two knights and sighs. "Canned food again."
+    - Why did the dragon cross the road? - Because his dyslexia made him think it was a hoard instead.
+    - Famous last words from the dragon slayer? - "Dang, the torch went out again. Anybody got some fire?"
+    - What do you call a dragon that can juggle? Talon-ted
+    - Why do dragons often sleep during the day? -So they can fight knights!
+    - Do dragons ever have a plan? No, they just wing it.
+    - How do dragons obtain their hoard? By fighting tooth and claw.
+    - What do young dragons compete in while in elementary school? A talon show.
+    - Why are dragons such fantastic miniature model makers? Because everything is to scale.
+    - Why were the Dragonology 101 lectures so unpopular to students? - They tended to drag on

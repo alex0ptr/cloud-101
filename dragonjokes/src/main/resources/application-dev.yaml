@@ -1,0 +1,5 @@
+config:
+  tableName: ${tableName}
+  jokes:
+    - This is not a joke.
+    - This is also not a joke.
