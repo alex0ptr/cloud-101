@@ -1,7 +1,5 @@
 #!/bin/bash
-set -e
-set -u
-set -o pipefail
+set -euo pipefail
 
 echo "This is provision.sh 👋"
 sudo amazon-linux-extras install docker

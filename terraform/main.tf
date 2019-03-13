@@ -7,7 +7,7 @@ variable "dragonjokes_version" {
 }
 
 variable "machine_image" {
-  default = "ami-0e3a8845198de41af"
+  default = "ami-0e3a8845198de41af" # our packer docker image
 }
 
 variable "machine_count" {

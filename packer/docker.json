@@ -4,12 +4,12 @@
     },
     "builders": [
         {
+            "type": "amazon-ebs",
             "ami_name": "my-docker-{{timestamp}}",
             "source_ami": "ami-07f1fbbff759e24dd",
             "instance_type": "m5.large",
             "region": "{{user `region`}}",
             "ssh_username": "ec2-user",
-            "type": "amazon-ebs",
             "tags": {
                 "owner": "alex",
                 "purpose": "demo"
