@@ -1,4 +1,3 @@
-
 resource "aws_dynamodb_table" "app_jokes" {
   name         = "jokes-${local.stack}"
   billing_mode = "PAY_PER_REQUEST"
@@ -9,3 +8,4 @@ resource "aws_dynamodb_table" "app_jokes" {
     type = "N"
   }
 }
+

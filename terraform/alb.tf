@@ -1,9 +1,9 @@
 resource "aws_lb" "app" {
-  name_prefix        = "${local.stack_short}"
+  name_prefix        = local.stack_short
   internal           = false
   load_balancer_type = "application"
-  security_groups    = ["${aws_security_group.app_loadbalancer.id}"]
-  subnets            = ["${split(",", aws_cloudformation_stack.vpc.outputs["SubnetsPublic"])}"]
+  security_groups    = [aws_security_group.app_loadbalancer.id]
+  subnets            = split(",", aws_cloudformation_stack.vpc.outputs["SubnetsPublic"])
 }
 
 output "curl_command" {
@@ -12,11 +12,12 @@ output "curl_command" {
 
 resource "aws_security_group" "app_loadbalancer" {
   name   = "app-loadbalancer-${local.stack}"
-  vpc_id = "${aws_cloudformation_stack.vpc.outputs["VPC"]}"
+  vpc_id = aws_cloudformation_stack.vpc.outputs["VPC"]
 }
 
+# to comment
 resource "aws_security_group_rule" "alb_allow_all_outgoing" {
-  security_group_id = "${aws_security_group.app_loadbalancer.id}"
+  security_group_id = aws_security_group.app_loadbalancer.id
   type              = "egress"
   from_port         = 0
   to_port           = 65535
@@ -25,7 +26,7 @@ resource "aws_security_group_rule" "alb_allow_all_outgoing" {
 }
 
 resource "aws_security_group_rule" "alb_allow_all_incoming" {
-  security_group_id = "${aws_security_group.app_loadbalancer.id}"
+  security_group_id = aws_security_group.app_loadbalancer.id
   type              = "ingress"
   from_port         = 0
   to_port           = 65535
@@ -34,7 +35,7 @@ resource "aws_security_group_rule" "alb_allow_all_incoming" {
 }
 
 resource "aws_lb_listener" "app" {
-  load_balancer_arn = "${aws_lb.app.arn}"
+  load_balancer_arn = aws_lb.app.arn
   port              = "80"
 
   default_action {
@@ -49,7 +50,7 @@ resource "aws_lb_listener" "app" {
 }
 
 resource "aws_lb_listener_rule" "host_based_routing" {
-  listener_arn = "${aws_lb_listener.app.arn}"
+  listener_arn = aws_lb_listener.app.arn
   priority     = 99
 
   condition {
@@ -59,15 +60,15 @@ resource "aws_lb_listener_rule" "host_based_routing" {
 
   action {
     type             = "forward"
-    target_group_arn = "${aws_lb_target_group.app.arn}"
+    target_group_arn = aws_lb_target_group.app.arn
   }
 }
 
 resource "aws_lb_target_group" "app" {
-  name_prefix = "${local.stack_short}"
+  name_prefix = local.stack_short
   port        = 8080
   protocol    = "HTTP"
-  vpc_id      = "${aws_cloudformation_stack.vpc.outputs["VPC"]}"
+  vpc_id      = aws_cloudformation_stack.vpc.outputs["VPC"]
 
   health_check {
     interval = 5
@@ -76,3 +77,4 @@ resource "aws_lb_target_group" "app" {
     timeout  = 3
   }
 }
+

@@ -1,6 +1,6 @@
 resource "aws_iam_instance_profile" "app" {
   name_prefix = "app-${local.stack}"
-  role        = "${aws_iam_role.app.name}"
+  role        = aws_iam_role.app.name
 }
 
 resource "aws_iam_role" "app" {
@@ -21,6 +21,7 @@ resource "aws_iam_role" "app" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_policy" "access_dynamodb_jokes" {
@@ -48,11 +49,12 @@ resource "aws_iam_policy" "access_dynamodb_jokes" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy_attachment" "allow_dynamo_jokes_to_app" {
-  role       = "${aws_iam_role.app.name}"
-  policy_arn = "${aws_iam_policy.access_dynamodb_jokes.arn}"
+  role       = aws_iam_role.app.name
+  policy_arn = aws_iam_policy.access_dynamodb_jokes.arn
 }
 
 resource "aws_iam_policy" "access_app_ecr" {
@@ -82,9 +84,11 @@ resource "aws_iam_policy" "access_app_ecr" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy_attachment" "allow_ecr_to_app" {
-  role       = "${aws_iam_role.app.name}"
-  policy_arn = "${aws_iam_policy.access_app_ecr.arn}"
+  role       = aws_iam_role.app.name
+  policy_arn = aws_iam_policy.access_app_ecr.arn
 }
+

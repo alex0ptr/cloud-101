@@ -7,7 +7,7 @@ variable "dragonjokes_version" {
 }
 
 variable "machine_image" {
-  default = "ami-0e3a8845198de41af" # our packer docker image
+  default = "ami-07b75b8fd684b2824" # our packer docker image
 }
 
 variable "machine_count" {
@@ -31,6 +31,7 @@ resource "random_id" "stack_postfix" {
 }
 
 locals {
-  stack = "${terraform.workspace}-${random_id.stack_postfix.hex}"
-  stack_short ="${random_id.stack_postfix.hex}"
+  stack       = "${terraform.workspace}-${random_id.stack_postfix.hex}"
+  stack_short = random_id.stack_postfix.hex
 }
+
